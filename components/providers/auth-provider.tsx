@@ -3,9 +3,11 @@
 import { useEffect } from "react"
 import { supabase } from "@/lib/supabase"
 import { useAuth } from "@/store/use-auth"
+import { useRouter } from "next/navigation"
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const setUser = useAuth((state) => state.setUser)
+    const router = useRouter()
 
     useEffect(() => {
         // Check active session on mount
@@ -19,12 +21,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             })
 
         // Listen for changes
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+        const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
             setUser(session?.user ?? null)
+
+            // Handle Password Recovery Event
+            if (event === 'PASSWORD_RECOVERY') {
+                router.push('/auth/reset-password')
+            }
         })
 
         return () => subscription.unsubscribe()
-    }, [setUser])
+    }, [setUser, router])
 
     return <>{children}</>
 }
