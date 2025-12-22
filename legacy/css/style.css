@@ -1,0 +1,440 @@
+@font-face {
+    font-family: 'ProximaNovaLight';
+    src: url('../fonts/proximanova-light-webfont.eot');
+    src: url('../fonts/proximanova-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proximanova-light-webfont.woff') format('woff'),
+         url('../fonts/proximanova-light-webfont.ttf') format('truetype'),
+         url('../fonts/proximanova-light-webfont.svg#ProximaNovaLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ProximaNovaRegular';
+    src: url('../fonts/proximanova-regular-webfont.eot');
+    src: url('../fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proximanova-regular-webfont.woff') format('woff'),
+         url('../fonts/proximanova-regular-webfont.ttf') format('truetype'),
+         url('../fonts/proximanova-regular-webfont.svg#ProximaNovaRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ProximaNovaSemibold';
+    src: url('../fonts/proximanova-semibold-webfont.eot');
+    src: url('../fonts/proximanova-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proximanova-semibold-webfont.woff') format('woff'),
+         url('../fonts/proximanova-semibold-webfont.ttf') format('truetype'),
+         url('../fonts/proximanova-semibold-webfont.svg#ProximaNovaSemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ProximaNovaBold';
+    src: url('../fonts/proximanova-bold-webfont.eot');
+    src: url('../fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proximanova-bold-webfont.woff') format('woff'),
+         url('../fonts/proximanova-bold-webfont.ttf') format('truetype'),
+         url('../fonts/proximanova-bold-webfont.svg#ProximaNovaBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ===== Base Styles ===== */
+body {
+    margin: 0;
+    font-family: 'ProximaNovaRegular', Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #454545;
+    overflow-x: hidden;
+}
+
+p {
+    margin: 0 0 20px;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* ===== Layout Structure ===== */
+.row {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* === Header Row Flex Layout === */
+/* ======================
+   NAVIGATION BAR STYLES
+   ====================== */
+
+/* Navbar container */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff; /* Changed from #333 to white */
+  padding: 10px 5%;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Added subtle shadow */
+}
+
+/* Logo styles - Left aligned */
+.logo-column {
+  flex: 0 0 auto;
+}
+
+#logo img {
+  height: 40px; /* Reduced from 50px */
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+#logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Main navigation - Right aligned */
+.main-nav {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.header-nav {
+  display: inline-flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 15px;
+  justify-content: flex-end; /* Ensure nav aligns right */
+}
+
+.header-nav li {
+  position: relative;
+}
+
+/* Navigation links */
+.header-nav > li > a {
+  display: block;
+  padding: 12px 15px;
+  color: #333; /* Changed from #f2f2f2 to dark */
+  text-decoration: none;
+  font-weight: 500;
+  font-family: 'ProximaNovaRegular', sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.header-nav > li > a:hover {
+  background-color: #f5f5f5; /* Changed from #ddd */
+  color: #0056b3; /* Changed hover color to blue */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff; /* Changed from #444 to white */
+  min-width: 200px;
+  list-style: none;
+  padding: 5px 0;
+  margin: 0;
+  z-index: 1000;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border-radius: 0 0 4px 4px;
+}
+
+.dropdown-menu li a {
+  padding: 10px 20px;
+  color: #333; /* Changed from #fff to dark */
+  display: block;
+  transition: all 0.2s ease;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #f8f9fa; /* Light hover background */
+  color: #0056b3; /* Blue hover color */
+  padding-left: 25px; /* Smooth hover effect */
+}
+
+/* Show dropdown on hover */
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+/* Dropdown indicator */
+.dropdown > a::after {
+  content: " ▼";
+  font-size: 0.6em;
+  vertical-align: middle;
+}
+
+/* ======================
+   RESPONSIVE ADJUSTMENTS
+   ====================== */
+@media (max-width: 768px) {
+  .header-row {
+    padding: 10px 20px;
+    flex-wrap: wrap;
+  }
+  
+  .main-nav {
+    width: 100%;
+    order: 3;
+    display: none; /* Hidden by default on mobile */
+    margin-top: 10px;
+  }
+  
+  .header-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    display: none;
+    padding-left: 15px;
+  }
+  
+  /* Mobile menu toggle */
+  .mobile-menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    order: 2;
+  }
+  
+  /* Show mobile menu when active */
+  .main-nav.active {
+    display: block;
+  }
+  
+  .dropdown.active .dropdown-menu {
+    display: block;
+  }
+}
+
+/* ===== Banner Section ===== */
+.slider-sec {
+    position: relative;
+    width: 100%;
+    margin: 0;
+}
+
+.inner-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.banner-txt {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    max-width: 500px;
+    color: #fff;
+}
+
+.banner-txt h1 {
+    margin: 0 0 15px;
+    font-family: 'ProximaNovaBold';
+    font-size: 36px;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+/* ===== Content Sections ===== */
+.content-sec {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.content-sec h2 {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.content-sec h2:after {
+    content: '';
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    right: 0;
+    width: 80px;
+    height: 3px;
+    background: #34b1c4;
+    margin: 0 auto;
+}
+
+/* ===== Services Section ===== */
+.services-sec {
+    background: #eef0f1;
+    padding: 60px 0;
+}
+
+.services-sec h2 {
+    margin-bottom: 40px;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-box {
+    background: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.img-box img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.txt-box {
+    padding: 20px;
+    text-align: center;
+}
+
+.txt-box h3 {
+    margin: 0 0 15px;
+    font-family: 'ProximaNovaSemibold';
+    font-size: 22px;
+    color: #1b2936;
+}
+
+/* ===== Footer ===== */
+.footer-sec {
+    background: #2f3539;
+    color: #fff;
+    padding: 60px 0 30px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.foot-1 h4 {
+    margin: 0 0 20px;
+    font-family: 'ProximaNovaBold';
+    font-size: 20px;
+}
+
+.footer-sec ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.footer-sec ul li {
+    margin-bottom: 10px;
+}
+
+.footer-sec ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-sec ul li a:hover {
+    color: #6bbfff;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.copy {
+    background: #262b2f;
+    padding: 15px 0;
+    text-align: center;
+    margin-top: 30px;
+}
+
+/* ===== Responsive Styles ===== */
+@media (max-width: 1024px) {
+    .top-bar-section li {
+        margin: 0 8px;
+    }
+    
+    .top-bar-section li a {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+    #logo {
+        margin: 10px auto;
+        text-align: center;
+    }
+    
+    .top-bar {
+        width: 100%;
+    }
+    
+    .top-bar-section ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .banner-txt {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        margin: 20px 0;
+        max-width: 100%;
+    }
+    
+    .services-grid,
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-bar-section li {
+        margin: 0 5px;
+    }
+    
+    .top-bar-section li a {
+        font-size: 12px;
+        padding: 10px 3px;
+    }
+    
+    .banner-txt h1 {
+        font-size: 28px;
+    }
+}

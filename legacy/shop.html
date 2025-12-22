@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop - Coming Soon | PSV IT & Office Solution</title>
+  <meta name="description" content="Our online shop is coming soon! Purchase laptops, printers, scanners, spare parts and accessories directly from PSV IT & Office Solution.">
+  <meta name="keywords" content="IT equipment shop, laptop purchase, printer purchase, spare parts, accessories, PSV IT shop">
+  <link href="css/output.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .text-gradient { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-pattern { background-image: radial-gradient(circle at 25px 25px, rgba(255,255,255,0.1) 2px, transparent 0), radial-gradient(circle at 75px 75px, rgba(255,255,255,0.1) 2px, transparent 0); background-size: 100px 100px; }
+    
+    /* Custom animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.4); }
+      50% { box-shadow: 0 0 40px rgba(34, 197, 94, 0.8); }
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    .float-animation { animation: float 3s ease-in-out infinite; }
+    .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .rotate-slow { animation: rotate 20s linear infinite; }
+    
+    /* Countdown styles */
+    .countdown-item {
+      background: linear-gradient(145deg, #ffffff, #f3f4f6);
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    /* Shopping cart animation */
+    @keyframes cart-bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-10px); }
+      60% { transform: translateY(-5px); }
+    }
+    
+    .cart-bounce { animation: cart-bounce 2s infinite; }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900 antialiased overflow-x-hidden">
+  
+  <!-- Navigation -->
+  <nav class="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <div class="flex items-center space-x-4">
+          <a href="index.html" class="flex items-center space-x-3 group">
+            <div class="relative">
+              <img src="images/Logo Jpg.jpg" alt="PSV IT & Office Solution" class="h-12 w-auto rounded-lg shadow-sm group-hover:shadow-md transition-shadow duration-300">
+            </div>
+            <div class="hidden sm:block">
+              <h1 class="text-xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors duration-300">PSV IT & Office Solution</h1>
+              <p class="text-xs text-gray-500 font-medium">Premium Equipment Rentals</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-200 relative group">
+            Home
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 group-hover:w-full transition-all duration-300"></span>
+          </a>
+          <a href="about-us.html" class="text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-200 relative group">
+            About Us
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-indigo-600 group-hover:w-full transition-all duration-300"></span>
+          </a>
+          
+          <!-- Rentals Dropdown -->
+          <div class="relative group">
+            <button class="flex items-center space-x-1 text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 rounded-md px-2 py-1">
+              <span>Rentals</span>
+              <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
+            <div class="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+              <div class="p-2">
+                <a href="faq.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group/item">
+                  <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center group-hover/item:bg-blue-200 transition-colors duration-200">
+                    <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-medium text-gray-900">Computer/Laptop Rental</p>
+                    <p class="text-sm text-gray-500">High-performance devices</p>
+                  </div>
+                </a>
+                <a href="printer-rental.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group/item">
+                  <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center group-hover/item:bg-green-200 transition-colors duration-200">
+                    <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-medium text-gray-900">Printer Rental</p>
+                    <p class="text-sm text-gray-500">Professional printing solutions</p>
+                  </div>
+                </a>
+                <a href="coming-soon.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group/item">
+                  <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center group-hover/item:bg-purple-200 transition-colors duration-200">
+                    <svg class="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-medium text-gray-900">Scanner Rental</p>
+                    <p class="text-sm text-gray-500">Document digitization</p>
+                  </div>
+                </a>
+                <a href="copiers-rental.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group/item">
+                  <div class="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center group-hover/item:bg-orange-200 transition-colors duration-200">
+                    <svg class="w-4 h-4 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 5.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-medium text-gray-900">Copier Rental</p>
+                    <p class="text-sm text-gray-500">Multi-function devices</p>
+                  </div>
+                </a>
+                <a href="surveillance.html" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 group/item">
+                  <div class="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center group-hover/item:bg-red-200 transition-colors duration-200">
+                    <svg class="w-4 h-4 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <p class="font-medium text-gray-900">Surveillance System</p>
+                    <p class="text-sm text-gray-500">Security camera solutions</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+          <a href="shop.html" class="text-green-600 hover:text-green-700 font-medium transition-colors duration-200 relative group">
+            Shop
+            <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-green-600 transition-all duration-300"></span>
+          </a>
+          <a href="contact.html" class="bg-indigo-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition-colors duration-200 shadow-md hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
+            Contact Us
+          </a>
+        </div>
+
+        <!-- Mobile menu button -->
+        <div class="lg:hidden">
+          <button id="mobile-menu-toggle" class="p-2 rounded-lg text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="lg:hidden bg-white border-t border-gray-100 hidden">
+      <div class="px-4 py-6 space-y-4">
+        <a href="index.html" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-indigo-600 font-medium transition-colors duration-200">Home</a>
+        <a href="about-us.html" class="block px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-indigo-600 font-medium transition-colors duration-200">About Us</a>
+        
+        <div class="space-y-2">
+          <button id="mobile-rentals-toggle" class="flex items-center justify-between w-full px-4 py-3 rounded-lg text-gray-700 hover:bg-gray-50 hover:text-indigo-600 font-medium transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
+            <span>Rentals</span>
+            <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+          <div id="mobile-rentals-menu" class="hidden pl-4 space-y-2">
+            <a href="faq.html" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors duration-200">Computer/Laptop Rental</a>
+            <a href="printer-rental.html" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors duration-200">Printer Rental</a>
+            <a href="coming-soon.html" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors duration-200">Scanner Rental</a>
+            <a href="copiers-rental.html" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors duration-200">Copier Rental</a>
+            <a href="surveillance.html" class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-50 hover:text-indigo-600 transition-colors duration-200">Surveillance System</a>
+          </div>
+        </div>
+        <a href="shop.html" class="block px-4 py-3 rounded-lg text-green-600 bg-green-50 hover:text-green-700 font-medium transition-colors duration-200">Shop</a>
+        <a href="contact.html" class="block px-4 py-3 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 font-medium transition-colors duration-200 text-center">Contact Us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Coming Soon Hero Section -->
+  <section class="relative min-h-screen gradient-bg hero-pattern overflow-hidden flex items-center">
+    <div class="absolute inset-0 bg-black/20"></div>
+    
+    <!-- Animated Background Elements -->
+    <div class="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-xl animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-40 h-40 bg-green-300/20 rounded-full blur-xl animate-pulse delay-1000"></div>
+    <div class="absolute top-1/2 left-1/4 w-24 h-24 bg-yellow-300/20 rounded-full blur-xl animate-pulse delay-500"></div>
+    
+    <!-- Floating Shopping Icons -->
+    <div class="absolute top-32 right-1/4 float-animation">
+      <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-32 left-1/3 float-animation" style="animation-delay: 1s;">
+      <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+      <!-- Main Content -->
+      <div class="mb-12">
+        <!-- Shopping Cart Icon with Animation -->
+        <div class="inline-flex items-center justify-center w-32 h-32 bg-white/20 rounded-full backdrop-blur-sm mb-8 cart-bounce">
+          <div class="w-20 h-20 bg-green-600 rounded-full flex items-center justify-center pulse-glow">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            </svg>
+          </div>
+        </div>
+
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight mb-8">
+          Shop is
+          <span class="block text-yellow-300">Coming Soon!</span>
+        </h1>
+        
+        <p class="text-xl sm:text-2xl lg:text-3xl text-gray-100 leading-relaxed max-w-4xl mx-auto mb-12">
+          We're building something amazing! Soon you'll be able to purchase laptops, printers, scanners, spare parts, and accessories directly from our online store.
+        </p>
+      </div>
+
+      <!-- Countdown Timer -->
+      <div class="mb-16">
+        <h3 class="text-2xl font-semibold text-white mb-8">Launching In</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+          <div class="countdown-item rounded-2xl p-6 text-center">
+            <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2" id="days">30</div>
+            <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">Days</div>
+          </div>
+          <div class="countdown-item rounded-2xl p-6 text-center">
+            <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2" id="hours">24</div>
+            <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">Hours</div>
+          </div>
+          <div class="countdown-item rounded-2xl p-6 text-center">
+            <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2" id="minutes">60</div>
+            <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">Minutes</div>
+          </div>
+          <div class="countdown-item rounded-2xl p-6 text-center">
+            <div class="text-3xl md:text-4xl font-bold text-gray-900 mb-2" id="seconds">60</div>
+            <div class="text-sm font-medium text-gray-600 uppercase tracking-wide">Seconds</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Call to Action -->
+      <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+        <a href="contact.html" class="inline-flex items-center justify-center px-10 py-5 bg-white text-indigo-600 font-bold text-lg rounded-2xl shadow-2xl hover:bg-gray-50 hover:shadow-3xl transition-all duration-300 transform hover:-translate-y-2">
+          Get Notified When We Launch
+          <svg class="ml-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-12"/>
+          </svg>
+        </a>
+        
+        <a href="index.html" class="inline-flex items-center justify-center px-10 py-5 border-3 border-white text-white font-bold text-lg rounded-2xl hover:bg-white hover:text-indigo-600 transition-all duration-300 transform hover:-translate-y-2">
+          Explore Our Rentals
+          <svg class="ml-3 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Coming Section -->
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+          What's <span class="text-gradient">Coming</span>
+        </h2>
+        <p class="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto">
+          Get ready for an amazing shopping experience with premium IT equipment and accessories
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Laptops & Computers -->
+        <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-8 text-center card-hover border border-blue-200">
+          <div class="w-20 h-20 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 rotate-slow">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Laptops & Computers</h3>
+          <p class="text-gray-700 leading-relaxed">High-performance laptops, desktops, and workstations from top brands with warranty and support.</p>
+        </div>
+
+        <!-- Printers & Scanners -->
+        <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-3xl p-8 text-center card-hover border border-green-200">
+          <div class="w-20 h-20 bg-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 rotate-slow" style="animation-delay: 5s;">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Printers & Scanners</h3>
+          <p class="text-gray-700 leading-relaxed">Professional printing and scanning solutions for all your business and personal needs.</p>
+        </div>
+
+        <!-- Spare Parts -->
+        <div class="bg-gradient-to-br from-purple-50 to-purple-100 rounded-3xl p-8 text-center card-hover border border-purple-200">
+          <div class="w-20 h-20 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 rotate-slow" style="animation-delay: 10s;">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Spare Parts</h3>
+          <p class="text-gray-700 leading-relaxed">Genuine spare parts and components for all major IT equipment brands and models.</p>
+        </div>
+
+        <!-- Accessories -->
+        <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-3xl p-8 text-center card-hover border border-orange-200">
+          <div class="w-20 h-20 bg-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 rotate-slow" style="animation-delay: 15s;">
+            <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2M9 12h6m-6 4h6"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-gray-900 mb-4">Accessories</h3>
+          <p class="text-gray-700 leading-relaxed">Cables, adapters, cases, and other essential accessories to complement your IT equipment.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Signup -->
+  <section class="py-20 lg:py-28 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="bg-white rounded-3xl p-12 shadow-2xl border border-gray-100">
+        <div class="w-16 h-16 bg-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-8">
+          <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+        </div>
+        
+        <h3 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
+          Be the First to Know!
+        </h3>
+        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+          Subscribe to get notified when our shop launches and receive exclusive early-bird discounts on your first purchase.
+        </p>
+        
+        <form action="https://formspree.io/f/xanjopdr" method="POST" class="max-w-md mx-auto">
+          <div class="flex flex-col sm:flex-row gap-4">
+            <input 
+              type="email" 
+              name="email" 
+              placeholder="Enter your email address" 
+              required
+              class="flex-1 px-6 py-4 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-lg"
+            >
+            <button 
+              type="submit"
+              class="px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition-colors duration-200 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+            >
+              Notify Me
+            </button>
+          </div>
+          <input type="hidden" name="_subject" value="Shop Launch Notification Signup">
+          <input type="hidden" name="source" value="Shop Coming Soon Page">
+        </form>
+        
+        <p class="text-sm text-gray-500 mt-4">
+          We respect your privacy. Unsubscribe at any time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+        <div class="lg:col-span-2">
+          <div class="flex items-center space-x-3 mb-6">
+            <img src="images/Logo Jpg.jpg" alt="PSV IT & Office Solution" class="h-12 w-auto rounded-lg">
+            <div>
+              <h3 class="text-xl font-bold">PSV IT & Office Solution</h3>
+              <p class="text-gray-400 text-sm">Premium Equipment Rentals</p>
+            </div>
+          </div>
+          <p class="text-gray-300 leading-relaxed mb-6 max-w-md">
+            Your trusted partner for comprehensive IT equipment rental solutions. We provide high-quality computers, printers, scanners, copiers, and surveillance systems with professional support.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Services</h4>
+          <ul class="space-y-3">
+            <li><a href="faq.html" class="text-gray-300 hover:text-white transition-colors duration-200">Computer Rental</a></li>
+            <li><a href="printer-rental.html" class="text-gray-300 hover:text-white transition-colors duration-200">Printer Rental</a></li>
+            <li><a href="coming-soon.html" class="text-gray-300 hover:text-white transition-colors duration-200">Scanner Rental</a></li>
+            <li><a href="copiers-rental.html" class="text-gray-300 hover:text-white transition-colors duration-200">Copier Rental</a></li>
+            <li><a href="surveillance.html" class="text-gray-300 hover:text-white transition-colors duration-200">Surveillance Systems</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Service Points</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start space-x-3">
+              <svg class="w-5 h-5 text-indigo-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 616 0z"/>
+              </svg>
+              <span class="text-gray-300 text-sm">8/3 Marutham Nagar, Vadavalli 641041</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-5 h-5 text-indigo-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 616 0z"/>
+              </svg>
+              <span class="text-gray-300 text-sm">93, Noombal, Iyyappanthangal, Chennai-600077</span>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-semibold mb-6">Contact Info</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start space-x-3">
+              <svg class="w-5 h-5 text-indigo-400 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 616 0z"/>
+              </svg>
+              <span class="text-gray-300 text-sm">No.36/71, 2nd floor, Thambuchetty St, Chennai-01</span>
+            </li>
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <a href="mailto:info@psvitsolution.in" class="text-gray-300 hover:text-white transition-colors duration-200">info@psvitsolution.in</a>
+            </li>
+            <li class="flex items-center space-x-3">
+              <svg class="w-5 h-5 text-indigo-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+              <a href="tel:+919385417594" class="text-gray-300 hover:text-white transition-colors duration-200">+91 9385417594</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+        <p class="text-gray-400">
+          © 2024 PSV IT & Office Solution. All rights reserved. | Designed with ❤️ for your business success.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu toggle
+    document.getElementById('mobile-menu-toggle').addEventListener('click', function() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Mobile rentals submenu toggle
+    document.getElementById('mobile-rentals-toggle').addEventListener('click', function() {
+      const submenu = document.getElementById('mobile-rentals-menu');
+      const icon = this.querySelector('svg');
+      submenu.classList.toggle('hidden');
+      icon.classList.toggle('rotate-180');
+    });
+
+    // Countdown Timer
+    function updateCountdown() {
+      // Set launch date (30 days from now)
+      const launchDate = new Date();
+      launchDate.setDate(launchDate.getDate() + 30);
+      
+      const now = new Date().getTime();
+      const distance = launchDate.getTime() - now;
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      document.getElementById('days').textContent = days;
+      document.getElementById('hours').textContent = hours;
+      document.getElementById('minutes').textContent = minutes;
+      document.getElementById('seconds').textContent = seconds;
+      
+      if (distance < 0) {
+        document.getElementById('days').textContent = '0';
+        document.getElementById('hours').textContent = '0';
+        document.getElementById('minutes').textContent = '0';
+        document.getElementById('seconds').textContent = '0';
+      }
+    }
+    
+    // Update countdown every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add scroll effect to navbar
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 100) {
+        nav.classList.add('shadow-xl');
+      } else {
+        nav.classList.remove('shadow-xl');
+      }
+    });
+  </script>
+</body>
+</html>
