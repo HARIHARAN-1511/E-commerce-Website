@@ -11,6 +11,8 @@ export default function AuthPage() {
     const [email, setEmail] = React.useState("")
     const [password, setPassword] = React.useState("")
     const [showPassword, setShowPassword] = React.useState(false)
+    const [isResetting, setIsResetting] = React.useState(false)
+    const [resetSent, setResetSent] = React.useState(false)
     const [loading, setLoading] = React.useState(false)
     const [error, setError] = React.useState<string | null>(null)
     const router = useRouter()
@@ -37,6 +39,24 @@ export default function AuthPage() {
         }
     }
 
+    async function handleResetPassword(e: React.FormEvent) {
+        e.preventDefault()
+        setLoading(true)
+        setError(null)
+
+        try {
+            const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                redirectTo: `${window.location.origin}/auth/reset-password`,
+            })
+            if (error) throw error
+            setResetSent(true)
+        } catch (err: any) {
+            setError(err.message)
+        } finally {
+            setLoading(false)
+        }
+    }
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
             <motion.div
@@ -46,85 +66,150 @@ export default function AuthPage() {
             >
                 <div className="text-center mb-10">
                     <h1 className="text-4xl font-black tracking-tight mb-2">
-                        {isLogin ? "Welcome Back" : "Create Account"}
+                        {isResetting ? "Reset Password" : isLogin ? "Welcome Back" : "Create Account"}
                     </h1>
                     <p className="text-slate-500 font-medium">
-                        {isLogin ? "Enter your details to access your gear." : "Join PSV IT Solutions for premium rentals."}
+                        {isResetting 
+                            ? "Enter your email to receive a reset link." 
+                            : isLogin 
+                                ? "Enter your details to access your gear." 
+                                : "Join PSV IT Solutions for premium rentals."}
                     </p>
                 </div>
 
                 <div className="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-xl">
-                    <form onSubmit={handleAuth} className="space-y-6">
-                        <div>
-                            <label className="block text-sm font-bold mb-2 uppercase tracking-wide text-slate-400">Email Address</label>
-                            <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                                <input
-                                    type="email"
-                                    required
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full bg-slate-50 pl-12 pr-6 py-4 rounded-2xl border border-transparent focus:border-primary focus:bg-white transition-all outline-none font-medium text-sm"
-                                    placeholder="name@company.com"
-                                />
-                            </div>
+                    {!isResetting && (
+                        <div className="flex bg-slate-50 p-1 rounded-2xl mb-8">
+                            <button
+                                onClick={() => setIsLogin(true)}
+                                className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all ${isLogin ? "bg-white text-primary shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
+                            >
+                                Sign In
+                            </button>
+                            <button
+                                onClick={() => setIsLogin(false)}
+                                className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all ${!isLogin ? "bg-white text-primary shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
+                            >
+                                Create Account
+                            </button>
                         </div>
+                    )}
 
-                        <div>
-                            <label className="block text-sm font-bold mb-2 uppercase tracking-wide text-slate-400">Password</label>
-                            <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                                <input
-                                    type={showPassword ? "text" : "password"}
-                                    required
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-slate-50 pl-12 pr-12 py-4 rounded-2xl border border-transparent focus:border-primary focus:bg-white transition-all outline-none font-medium text-sm"
-                                    placeholder="••••••••"
-                                />
+                    {resetSent ? (
+                        <div className="text-center py-6">
+                            <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500">
+                                <Mail className="w-8 h-8" />
+                            </div>
+                            <h3 className="text-xl font-bold mb-2">Check your email</h3>
+                            <p className="text-slate-500 text-sm mb-6">
+                                We've sent a password reset link to <span className="font-bold text-slate-900">{email}</span>
+                            </p>
+                            <button
+                                onClick={() => {
+                                    setIsResetting(false)
+                                    setResetSent(false)
+                                }}
+                                className="text-primary font-bold text-sm hover:underline"
+                            >
+                                Back to Sign In
+                            </button>
+                        </div>
+                    ) : (
+                        <form onSubmit={isResetting ? handleResetPassword : handleAuth} className="space-y-6">
+                            <div>
+                                <label className="block text-sm font-bold mb-2 uppercase tracking-wide text-slate-400">Email Address</label>
+                                <div className="relative">
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                    <input
+                                        type="email"
+                                        required
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="w-full bg-slate-50 pl-12 pr-6 py-4 rounded-2xl border border-transparent focus:border-primary focus:bg-white transition-all outline-none font-medium text-sm"
+                                        placeholder="name@company.com"
+                                    />
+                                </div>
+                            </div>
+
+                            {!isResetting && (
+                                <div>
+                                    <div className="flex justify-between items-end mb-2">
+                                        <label className="text-sm font-bold uppercase tracking-wide text-slate-400">Password</label>
+                                        <button
+                                            type="button"
+                                            onClick={() => setIsResetting(true)}
+                                            className="text-xs font-bold text-primary hover:underline"
+                                        >
+                                            Forgot Password?
+                                        </button>
+                                    </div>
+                                    <div className="relative">
+                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                        <input
+                                            type={showPassword ? "text" : "password"}
+                                            required
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            className="w-full bg-slate-50 pl-12 pr-12 py-4 rounded-2xl border border-transparent focus:border-primary focus:bg-white transition-all outline-none font-medium text-sm"
+                                            placeholder="••••••••"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                                        >
+                                            {showPassword ? (
+                                                <EyeOff className="w-5 h-5" />
+                                            ) : (
+                                                <Eye className="w-5 h-5" />
+                                            )}
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+
+                            {error && (
+                                <div className="p-4 rounded-xl bg-red-50 text-red-500 text-sm font-bold">
+                                    {error}
+                                </div>
+                            )}
+
+                            <button
+                                disabled={loading}
+                                className="w-full bg-primary text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 active:scale-[0.98] disabled:opacity-50"
+                            >
+                                {loading ? (
+                                    <Loader2 className="w-5 h-5 animate-spin" />
+                                ) : (
+                                    <>
+                                        <span>{isResetting ? "Send Reset Link" : isLogin ? "Sign In" : "Get Started"}</span>
+                                        <ArrowRight className="w-5 h-5" />
+                                    </>
+                                )}
+                            </button>
+                            
+                            {isResetting && (
                                 <button
                                     type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                                    onClick={() => setIsResetting(false)}
+                                    className="w-full text-center text-sm font-bold text-slate-500 hover:text-primary transition-colors mt-4"
                                 >
-                                    {showPassword ? (
-                                        <EyeOff className="w-5 h-5" />
-                                    ) : (
-                                        <Eye className="w-5 h-5" />
-                                    )}
+                                    Cancel and Sign In
                                 </button>
-                            </div>
-                        </div>
-
-                        {error && (
-                            <div className="p-4 rounded-xl bg-red-50 text-red-500 text-sm font-bold">
-                                {error}
-                            </div>
-                        )}
-
-                        <button
-                            disabled={loading}
-                            className="w-full bg-primary text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 active:scale-[0.98] disabled:opacity-50"
-                        >
-                            {loading ? (
-                                <Loader2 className="w-5 h-5 animate-spin" />
-                            ) : (
-                                <>
-                                    <span>{isLogin ? "Sign In" : "Get Started"}</span>
-                                    <ArrowRight className="w-5 h-5" />
-                                </>
                             )}
-                        </button>
-                    </form>
+                        </form>
+                    )}
 
-                    <div className="mt-8 pt-8 border-t border-slate-100">
-                        <button
-                            onClick={() => setIsLogin(!isLogin)}
-                            className="w-full text-center text-sm font-bold text-slate-500 hover:text-primary transition-colors"
-                        >
-                            {isLogin ? "Need an account? Create one" : "Already have an account? Sign In"}
-                        </button>
-                    </div>
+                    {!isResetting && (
+                        <div className="mt-8 pt-8 border-t border-slate-100">
+                            <button
+                                onClick={() => setIsLogin(!isLogin)}
+                                className="w-full text-center text-sm font-bold text-slate-500 hover:text-primary transition-colors"
+                            >
+                                {isLogin ? "Need an account? Create one" : "Already have an account? Sign In"}
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 <p className="mt-8 text-center text-xs text-slate-400 font-bold uppercase tracking-widest">
