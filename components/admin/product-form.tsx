@@ -4,8 +4,8 @@ import * as React from "react"
 import { supabase } from "@/lib/supabase"
 import { Product } from "@/types"
 import { useRouter } from "next/navigation"
-import { Loader2, Save, X, Image as ImageIcon, Info, DollarSign, Package, Settings } from "lucide-react"
-import { motion } from "framer-motion"
+import { Loader2, Save, X, Image as ImageIcon, Info, DollarSign, Package, Settings, ShieldCheck } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
 
 interface ProductFormProps {
     initialData?: Product
@@ -84,11 +84,11 @@ export function ProductForm({ initialData }: ProductFormProps) {
                                 <label className="block text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Description</label>
                                 <textarea
                                     required
-                                    rows={4}
+                                    rows={5}
                                     value={formData.description}
                                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                    className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-slate-900"
-                                    placeholder="Describe the product features..."
+                                    className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-slate-900 resize-none"
+                                    placeholder="Describe the product features and benefits..."
                                 />
                             </div>
 
@@ -100,7 +100,7 @@ export function ProductForm({ initialData }: ProductFormProps) {
                                         required
                                         value={formData.price}
                                         onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
-                                        className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-slate-900"
+                                        className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-bold text-slate-900"
                                     />
                                 </div>
                                 <div>
@@ -110,7 +110,7 @@ export function ProductForm({ initialData }: ProductFormProps) {
                                         required
                                         value={formData.stock_quantity}
                                         onChange={(e) => setFormData({ ...formData, stock_quantity: Number(e.target.value) })}
-                                        className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-slate-900"
+                                        className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-bold text-slate-900"
                                     />
                                 </div>
                             </div>
@@ -135,99 +135,26 @@ export function ProductForm({ initialData }: ProductFormProps) {
                                     </button>
                                 </div>
 
-                                {formData.is_rental && (
-                                    <motion.div
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: 'auto' }}
-                                        className="pt-4 border-t border-slate-200"
-                                    >
-                                        <label className="block text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Monthly Rental Price (₹)</label>
-                                        <input
-                                            type="number"
-                                            required={formData.is_rental}
-                                            value={formData.rental_price || ''}
-                                            onChange={(e) => setFormData({ ...formData, rental_price: Number(e.target.value) })}
-                                            className="w-full bg-white border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-slate-900"
-                                        />
-                                    </motion.div>
-                                )}
+                                <AnimatePresence>
+                                    {formData.is_rental && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0 }}
+                                            animate={{ opacity: 1, height: 'auto' }}
+                                            exit={{ opacity: 0, height: 0 }}
+                                            className="pt-6 border-t border-slate-200 space-y-4"
+                                        >
+                                            <label className="block text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Monthly Rental Price (₹)</label>
+                                            <input
+                                                type="number"
+                                                required={formData.is_rental}
+                                                value={formData.rental_price_monthly}
+                                                onChange={(e) => setFormData({ ...formData, rental_price_monthly: Number(e.target.value) })}
+                                                className="w-full bg-white border-2 border-emerald-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-emerald-500/20 transition-all font-black text-slate-900"
+                                            />
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
-
-                            <div>
-                                <label className="block text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Description</label>
-                                <textarea
-                                    required
-                                    rows={5}
-                                    value={formData.description}
-                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                                    className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium resize-none"
-                                    placeholder="Describe the product features and benefits..."
-                                />
-                            </div>
-                        </div>
-                    </section>
-
-                    <section className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm space-y-8">
-                        <div className="flex items-center gap-3 mb-2">
-                            <div className="w-8 h-8 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600">
-                                <DollarSign className="w-4 h-4" />
-                            </div>
-                            <h3 className="text-xl font-black text-slate-900">Pricing & Inventory</h3>
-                        </div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div>
-                                <label className="block text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Purchase Price (₹)</label>
-                                <input
-                                    required
-                                    type="number"
-                                    value={formData.price}
-                                    onChange={(e) => setFormData({ ...formData, price: parseFloat(e.target.value) })}
-                                    className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-bold"
-                                />
-                            </div>
-                            <div>
-                                <label className="block text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Stock Quantity</label>
-                                <input
-                                    required
-                                    type="number"
-                                    value={formData.stock_quantity}
-                                    onChange={(e) => setFormData({ ...formData, stock_quantity: parseInt(e.target.value) })}
-                                    className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-bold"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="pt-6 border-t border-slate-50 space-y-6">
-                            <div className="flex items-center justify-between p-6 bg-slate-50 rounded-2xl">
-                                <div>
-                                    <p className="font-black text-slate-900">Enable Rental Option</p>
-                                    <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">Allow customers to rent this item</p>
-                                </div>
-                                <button
-                                    type="button"
-                                    onClick={() => setFormData({ ...formData, is_rental: !formData.is_rental })}
-                                    className={`w-14 h-8 rounded-full transition-all relative ${formData.is_rental ? 'bg-primary' : 'bg-slate-300'}`}
-                                >
-                                    <div className={`absolute top-1 w-6 h-6 bg-white rounded-full transition-all ${formData.is_rental ? 'left-7' : 'left-1'}`} />
-                                </button>
-                            </div>
-
-                            {formData.is_rental && (
-                                <motion.div
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    className="overflow-hidden"
-                                >
-                                    <label className="block text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Monthly Rental Price (₹)</label>
-                                    <input
-                                        type="number"
-                                        value={formData.rental_price_monthly}
-                                        onChange={(e) => setFormData({ ...formData, rental_price_monthly: parseFloat(e.target.value) })}
-                                        className="w-full bg-white border-2 border-primary/20 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-black"
-                                    />
-                                </motion.div>
-                            )}
                         </div>
                     </section>
                 </div>
@@ -257,7 +184,7 @@ export function ProductForm({ initialData }: ProductFormProps) {
                                 type="text"
                                 value={formData.image_url}
                                 onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                                className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-xs font-bold font-mono"
+                                className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-xs font-bold font-mono text-slate-900"
                                 placeholder="https://example.com/image.jpg"
                             />
                         </div>
@@ -272,11 +199,11 @@ export function ProductForm({ initialData }: ProductFormProps) {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Category</label>
+                            <label className="block text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Category</label>
                             <select
                                 value={formData.category}
                                 onChange={(e) => setFormData({ ...formData, category: e.target.value as any })}
-                                className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-black appearance-none"
+                                className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-black appearance-none text-slate-900"
                             >
                                 <option value="computers">Computers</option>
                                 <option value="printers">Printers</option>

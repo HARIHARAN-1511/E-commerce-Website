@@ -86,7 +86,7 @@ export default function ResetPasswordPage() {
                 <div className="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-xl">
                     <form onSubmit={handleReset} className="space-y-6">
                         <div>
-                            <label className="block text-sm font-bold mb-2 uppercase tracking-wide text-slate-400">New Password</label>
+                            <label className="block text-sm font-bold mb-2 uppercase tracking-wide text-slate-500">New Password</label>
                             <div className="relative">
                                 <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                                 <input
