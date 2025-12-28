@@ -2,6 +2,153 @@ import { Navbar } from "@/components/layout/navbar";
 import { Hero } from "@/components/home/hero";
 import { ServiceCard } from "@/components/home/service-cards";
 import { Footer } from "@/components/layout/footer";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Printer, Scanner, Copier & Computer Rental Chennai - Best Prices',
+  description: 'PSV IT Solutions offers premium printer rental, scanner rental, copier rental & computer rental in Chennai. HP, Canon, Epson brands available. Free delivery, professional installation & 24/7 support. Get quote now!',
+  keywords: [
+    'printer rental Chennai',
+    'scanner rental Chennai', 
+    'copier rental Chennai',
+    'computer rental Chennai',
+    'laptop rental Chennai',
+    'HP printer on rent Chennai',
+    'Canon printer rental',
+    'office equipment rental',
+    'IT equipment rental Chennai',
+    'photocopier rental',
+    'multifunction printer rental',
+  ],
+  alternates: {
+    canonical: 'https://psvitsolution.in',
+  },
+  openGraph: {
+    title: 'PSV IT Solutions - Best Printer & IT Equipment Rental Chennai',
+    description: 'Premium printer, scanner, copier & computer rental services in Chennai. Top brands, best prices, free delivery & 24/7 support.',
+    url: 'https://psvitsolution.in',
+  },
+};
+
+function OrganizationJsonLd() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'PSV IT & Office Solutions',
+    url: 'https://psvitsolution.in',
+    logo: 'https://psvitsolution.in/logo.png',
+    description: 'Leading IT equipment rental company in Chennai offering printers, copiers, scanners, computers and laptops on rent.',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'No.36/71, 2nd floor, Thambuchetty Street',
+      addressLocality: 'Chennai',
+      addressRegion: 'Tamil Nadu',
+      postalCode: '600001',
+      addressCountry: 'IN',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+91-9385417594',
+      contactType: 'customer service',
+      areaServed: 'IN',
+      availableLanguage: ['English', 'Tamil'],
+    },
+    sameAs: [
+      'https://wa.me/919385417594',
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
+function LocalBusinessJsonLd() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    '@id': 'https://psvitsolution.in',
+    name: 'PSV IT & Office Solutions',
+    image: 'https://psvitsolution.in/banner.jpeg',
+    url: 'https://psvitsolution.in',
+    telephone: '+91-9385417594',
+    email: 'info@psvitsolution.in',
+    priceRange: '₹₹',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'No.36/71, 2nd floor, Thambuchetty Street',
+      addressLocality: 'Chennai',
+      addressRegion: 'Tamil Nadu',
+      postalCode: '600001',
+      addressCountry: 'IN',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 13.0827,
+      longitude: 80.2707,
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '09:00',
+        closes: '18:00',
+      },
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: 'Saturday',
+        opens: '09:00',
+        closes: '14:00',
+      },
+    ],
+    areaServed: {
+      '@type': 'City',
+      name: 'Chennai',
+    },
+    serviceType: [
+      'Printer Rental',
+      'Copier Rental',
+      'Scanner Rental',
+      'Computer Rental',
+      'Laptop Rental',
+      'IT Equipment Rental',
+    ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
+function WebsiteJsonLd() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'PSV IT & Office Solutions',
+    url: 'https://psvitsolution.in',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: 'https://psvitsolution.in/shop?search={search_term_string}',
+      },
+      'query-input': 'required name=search_term_string',
+    },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
 
 const services = [
   {
@@ -33,6 +180,9 @@ const services = [
 export default function Home() {
   return (
     <main className="relative min-h-screen">
+      <OrganizationJsonLd />
+      <LocalBusinessJsonLd />
+      <WebsiteJsonLd />
       <Navbar />
       <Hero />
 
