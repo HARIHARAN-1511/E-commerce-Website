@@ -50,11 +50,11 @@ export function Navbar() {
                         </Link>
 
                         <div className="hidden md:flex items-center space-x-8">
-                            <Link href="/" className="text-sm font-medium hover:text-primary transition-colors">Home</Link>
-                            <Link href="/about" className="text-sm font-medium hover:text-primary transition-colors">About Us</Link>
+                            <Link href="/" className="text-sm font-bold text-slate-700 hover:text-primary transition-colors">Home</Link>
+                            <Link href="/about" className="text-sm font-bold text-slate-700 hover:text-primary transition-colors">About Us</Link>
 
                             <div className="relative group">
-                                <button className="flex items-center space-x-1 text-sm font-medium hover:text-primary transition-colors">
+                                <button className="flex items-center space-x-1 text-sm font-bold text-slate-700 hover:text-primary transition-colors">
                                     <span>Rentals</span>
                                     <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform" />
                                 </button>

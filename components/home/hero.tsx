@@ -36,10 +36,10 @@ export function Hero() {
                         transition={{ duration: 0.8, ease: "easeOut" }}
                     >
                         <h1 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mb-6 leading-tight text-white">
-                            Empowering Your Business with <span className="text-primary italic">Smart IT</span> Solutions
+                            Empowering Your Business with <span className="text-indigo-400 italic">Smart IT</span> Solutions
                         </h1>
 
-                        <p className="text-lg text-slate-300 mb-10 leading-relaxed max-w-lg">
+                        <p className="text-lg text-slate-100 mb-10 leading-relaxed max-w-lg font-medium">
                             High-performance rentals for printers, copiers, computers, and surveillance systems.
                             Get flexible plans, fast delivery, and expert support.
                         </p>

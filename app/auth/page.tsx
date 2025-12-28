@@ -65,10 +65,10 @@ export default function AuthPage() {
                 className="max-w-md w-full"
             >
                 <div className="text-center mb-10">
-                    <h1 className="text-4xl font-black tracking-tight mb-2">
+                    <h1 className="text-4xl font-black tracking-tight mb-2 text-slate-900">
                         {isResetting ? "Reset Password" : isLogin ? "Welcome Back" : "Create Account"}
                     </h1>
-                    <p className="text-slate-500 font-medium">
+                    <p className="text-slate-600 font-medium">
                         {isResetting 
                             ? "Enter your email to receive a reset link." 
                             : isLogin 
@@ -79,16 +79,16 @@ export default function AuthPage() {
 
                 <div className="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-xl">
                     {!isResetting && (
-                        <div className="flex bg-slate-50 p-1 rounded-2xl mb-8">
+                        <div className="flex bg-slate-100 p-1 rounded-2xl mb-8">
                             <button
                                 onClick={() => setIsLogin(true)}
-                                className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all ${isLogin ? "bg-white text-primary shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
+                                className={`flex-1 py-3 rounded-xl font-black text-sm transition-all ${isLogin ? "bg-white text-primary shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
                             >
                                 Sign In
                             </button>
                             <button
                                 onClick={() => setIsLogin(false)}
-                                className={`flex-1 py-3 rounded-xl font-bold text-sm transition-all ${!isLogin ? "bg-white text-primary shadow-sm" : "text-slate-400 hover:text-slate-600"}`}
+                                className={`flex-1 py-3 rounded-xl font-black text-sm transition-all ${!isLogin ? "bg-white text-primary shadow-sm" : "text-slate-500 hover:text-slate-700"}`}
                             >
                                 Create Account
                             </button>
@@ -97,11 +97,11 @@ export default function AuthPage() {
 
                     {resetSent ? (
                         <div className="text-center py-6">
-                            <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4 text-green-500">
+                            <div className="w-16 h-16 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600">
                                 <Mail className="w-8 h-8" />
                             </div>
-                            <h3 className="text-xl font-bold mb-2">Check your email</h3>
-                            <p className="text-slate-500 text-sm mb-6">
+                            <h3 className="text-xl font-bold text-slate-900 mb-2">Check your email</h3>
+                            <p className="text-slate-600 text-sm mb-6">
                                 We've sent a password reset link to <span className="font-bold text-slate-900">{email}</span>
                             </p>
                             <button
@@ -109,7 +109,7 @@ export default function AuthPage() {
                                     setIsResetting(false)
                                     setResetSent(false)
                                 }}
-                                className="text-primary font-bold text-sm hover:underline"
+                                className="text-primary font-black text-sm hover:underline"
                             >
                                 Back to Sign In
                             </button>
@@ -117,15 +117,15 @@ export default function AuthPage() {
                     ) : (
                         <form onSubmit={isResetting ? handleResetPassword : handleAuth} className="space-y-6">
                             <div>
-                                <label className="block text-sm font-bold mb-2 uppercase tracking-wide text-slate-400">Email Address</label>
+                                <label className="block text-sm font-black mb-2 uppercase tracking-wide text-slate-500">Email Address</label>
                                 <div className="relative">
-                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                                     <input
                                         type="email"
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full bg-slate-50 pl-12 pr-6 py-4 rounded-2xl border border-transparent focus:border-primary focus:bg-white transition-all outline-none font-medium text-sm"
+                                        className="w-full bg-slate-50 border border-slate-200 text-slate-900 pl-12 pr-6 py-4 rounded-2xl focus:border-primary focus:bg-white transition-all outline-none font-bold text-sm"
                                         placeholder="name@company.com"
                                     />
                                 </div>
@@ -134,29 +134,29 @@ export default function AuthPage() {
                             {!isResetting && (
                                 <div>
                                     <div className="flex justify-between items-end mb-2">
-                                        <label className="text-sm font-bold uppercase tracking-wide text-slate-400">Password</label>
+                                        <label className="text-sm font-black uppercase tracking-wide text-slate-500">Password</label>
                                         <button
                                             type="button"
                                             onClick={() => setIsResetting(true)}
-                                            className="text-xs font-bold text-primary hover:underline"
+                                            className="text-xs font-black text-primary hover:underline"
                                         >
                                             Forgot Password?
                                         </button>
                                     </div>
                                     <div className="relative">
-                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                        <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
                                         <input
                                             type={showPassword ? "text" : "password"}
                                             required
-                                            value={password}
+                                            value={confirmPassword || password} // confirmation handled in reset page, here it's just login
                                             onChange={(e) => setPassword(e.target.value)}
-                                            className="w-full bg-slate-50 pl-12 pr-12 py-4 rounded-2xl border border-transparent focus:border-primary focus:bg-white transition-all outline-none font-medium text-sm"
+                                            className="w-full bg-slate-50 border border-slate-200 text-slate-900 pl-12 pr-12 py-4 rounded-2xl focus:border-primary focus:bg-white transition-all outline-none font-bold text-sm"
                                             placeholder="••••••••"
                                         />
                                         <button
                                             type="button"
                                             onClick={() => setShowPassword(!showPassword)}
-                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 focus:outline-none"
                                         >
                                             {showPassword ? (
                                                 <EyeOff className="w-5 h-5" />
@@ -169,14 +169,14 @@ export default function AuthPage() {
                             )}
 
                             {error && (
-                                <div className="p-4 rounded-xl bg-red-50 text-red-500 text-sm font-bold">
+                                <div className="p-4 rounded-xl bg-red-50 text-red-600 text-sm font-bold border border-red-100">
                                     {error}
                                 </div>
                             )}
 
                             <button
                                 disabled={loading}
-                                className="w-full bg-primary text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 active:scale-[0.98] disabled:opacity-50"
+                                className="w-full bg-primary text-white py-4 rounded-2xl font-black flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 active:scale-[0.98] disabled:opacity-50"
                             >
                                 {loading ? (
                                     <Loader2 className="w-5 h-5 animate-spin" />
@@ -192,7 +192,7 @@ export default function AuthPage() {
                                 <button
                                     type="button"
                                     onClick={() => setIsResetting(false)}
-                                    className="w-full text-center text-sm font-bold text-slate-500 hover:text-primary transition-colors mt-4"
+                                    className="w-full text-center text-sm font-black text-slate-600 hover:text-primary transition-colors mt-4"
                                 >
                                     Cancel and Sign In
                                 </button>
@@ -204,7 +204,7 @@ export default function AuthPage() {
                         <div className="mt-8 pt-8 border-t border-slate-100">
                             <button
                                 onClick={() => setIsLogin(!isLogin)}
-                                className="w-full text-center text-sm font-bold text-slate-500 hover:text-primary transition-colors"
+                                className="w-full text-center text-sm font-black text-slate-600 hover:text-primary transition-colors"
                             >
                                 {isLogin ? "Need an account? Create one" : "Already have an account? Sign In"}
                             </button>
@@ -212,7 +212,7 @@ export default function AuthPage() {
                     )}
                 </div>
 
-                <p className="mt-8 text-center text-xs text-slate-400 font-bold uppercase tracking-widest">
+                <p className="mt-8 text-center text-xs text-slate-500 font-black uppercase tracking-widest">
                     Secure Authentication by Supabase
                 </p>
             </motion.div>
