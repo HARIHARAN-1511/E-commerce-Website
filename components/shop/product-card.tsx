@@ -44,10 +44,11 @@ export function ProductCard({ product }: ProductCardProps) {
                 {/* Product Image */}
                 <div className="relative aspect-square overflow-hidden bg-slate-100">
                         <Image
-                            src={product.image_url || '/placeholder-product.jpg'}
+                            src={product.image_url || "/placeholder-product.jpg"}
                             alt={product.name}
                             fill
-                            className={`object-contain p-4 transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+                            className="object-contain p-4 group-hover:scale-110 transition-transform duration-500"
+                            unoptimized
                         />
 
                     {/* Quick Action Overlay */}

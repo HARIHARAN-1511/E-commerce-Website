@@ -124,7 +124,7 @@ export default function AdminProductsPage() {
                                                 <div className="flex items-center gap-4">
                                                     <div className="relative w-12 h-12 rounded-xl bg-slate-100 overflow-hidden flex-shrink-0 border border-slate-200">
                                                         {product.image_url ? (
-                                                            <Image src={product.image_url} alt={product.name} fill className="object-cover" />
+                                                            <Image src={product.image_url} alt={product.name} fill className="object-cover" unoptimized />
                                                         ) : (
                                                             <Package className="w-6 h-6 text-slate-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                                                         )}

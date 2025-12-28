@@ -98,6 +98,7 @@ export default function ProductDetailPage() {
                                             fill
                                             className="object-contain p-2"
                                             priority
+                                            unoptimized
                                         />
                                     </motion.div>
                                 </AnimatePresence>
@@ -118,6 +119,7 @@ export default function ProductDetailPage() {
                                                 alt={`${product.name} gallery ${idx}`}
                                                 fill
                                                 className="object-cover"
+                                                unoptimized
                                             />
                                         </button>
                                     ))}
