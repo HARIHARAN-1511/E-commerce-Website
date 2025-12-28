@@ -4,7 +4,7 @@ import * as React from "react"
 import { supabase } from "@/lib/supabase"
 import { Product } from "@/types"
 import { useRouter } from "next/navigation"
-import { Loader2, Save, X, Image as ImageIcon, Info, DollarSign, Package, Settings, ShieldCheck } from "lucide-react"
+import { Loader2, Save, X, Image as ImageIcon, Info, DollarSign, Package, Settings, ShieldCheck, Upload, Trash2, Plus } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
 interface ProductFormProps {
@@ -14,6 +14,10 @@ interface ProductFormProps {
 export function ProductForm({ initialData }: ProductFormProps) {
     const router = useRouter()
     const [loading, setLoading] = React.useState(false)
+    const [uploading, setUploading] = React.useState(false)
+    const fileInputRef = React.useRef<HTMLInputElement>(null)
+    const [dragActive, setDragActive] = React.useState(false)
+
     const [formData, setFormData] = React.useState<Partial<Product>>(
         initialData || {
             name: "",
@@ -21,6 +25,7 @@ export function ProductForm({ initialData }: ProductFormProps) {
             price: 0,
             category: "computers",
             image_url: "",
+            images: [],
             stock_quantity: 0,
             is_rental: false,
             rental_price_monthly: 0,
@@ -28,21 +33,114 @@ export function ProductForm({ initialData }: ProductFormProps) {
         }
     )
 
+    const handleUpload = async (files: FileList | File[]) => {
+        setUploading(true)
+        const newImages: string[] = [...(formData.images || [])]
+        
+        for (const file of Array.from(files)) {
+            if (!file.type.startsWith('image/')) continue
+
+            const fileExt = file.name.split('.').pop()
+            const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`
+            const filePath = `product-images/${fileName}`
+
+            try {
+                const { error: uploadError, data } = await supabase.storage
+                    .from('products')
+                    .upload(filePath, file)
+
+                if (uploadError) throw uploadError
+
+                const { data: { publicUrl } } = supabase.storage
+                    .from('products')
+                    .getPublicUrl(filePath)
+
+                newImages.push(publicUrl)
+                
+                // Set first image as main image if none exists
+                if (!formData.image_url) {
+                    setFormData(prev => ({ ...prev, image_url: publicUrl }))
+                }
+            } catch (err: any) {
+                console.error("Upload error:", err.message)
+                alert("Failed to upload image: " + err.message)
+            }
+        }
+
+        setFormData(prev => ({ ...prev, images: newImages }))
+        setUploading(false)
+    }
+
+    const handlePaste = async (e: React.ClipboardEvent) => {
+        const items = e.clipboardData.items
+        const files: File[] = []
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf('image') !== -1) {
+                const file = items[i].getAsFile()
+                if (file) files.push(file)
+            }
+        }
+        if (files.length > 0) {
+            handleUpload(files)
+        }
+    }
+
+    const handleDrag = (e: React.DragEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
+        if (e.type === "dragenter" || e.type === "dragover") {
+            setDragActive(true)
+        } else if (e.type === "dragleave") {
+            setDragActive(false)
+        }
+    }
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault()
+        e.stopPropagation()
+        setDragActive(false)
+        if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+            handleUpload(e.dataTransfer.files)
+        }
+    }
+
+    const removeImage = (index: number) => {
+        const newImages = [...(formData.images || [])]
+        const removed = newImages.splice(index, 1)[0]
+        
+        const update: Partial<Product> = { images: newImages }
+        if (formData.image_url === removed) {
+            update.image_url = newImages[0] || ""
+        }
+        
+        setFormData(prev => ({ ...prev, ...update }))
+    }
+
+    const setMainImage = (url: string) => {
+        setFormData(prev => ({ ...prev, image_url: url }))
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setLoading(true)
 
         try {
+            const submitData = {
+                ...formData,
+                images: formData.images || [],
+                specifications: formData.specifications || {}
+            }
+
             if (initialData?.id) {
-                const { error } = await (supabase
-                    .from('products') as any)
-                    .update(formData)
+                const { error } = await supabase
+                    .from('products')
+                    .update(submitData)
                     .eq('id', initialData.id)
                 if (error) throw error
             } else {
-                const { error } = await (supabase
-                    .from('products') as any)
-                    .insert([formData])
+                const { error } = await supabase
+                    .from('products')
+                    .insert([submitData])
                 if (error) throw error
             }
             router.push('/admin/products')
@@ -55,7 +153,11 @@ export function ProductForm({ initialData }: ProductFormProps) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-12 max-w-5xl">
+        <form 
+            onSubmit={handleSubmit} 
+            onPaste={handlePaste}
+            className="space-y-12 max-w-5xl"
+        >
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
                 {/* Left Column: Essential Info */}
                 <div className="lg:col-span-2 space-y-8">
@@ -157,39 +259,95 @@ export function ProductForm({ initialData }: ProductFormProps) {
                             </div>
                         </div>
                     </section>
-                </div>
 
-                {/* Right Column: Media & Meta */}
-                <div className="space-y-8">
                     <section className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm space-y-8">
                         <div className="flex items-center gap-3 mb-2">
                             <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600">
                                 <ImageIcon className="w-4 h-4" />
                             </div>
-                            <h3 className="text-xl font-black text-slate-900">Product Image</h3>
+                            <h3 className="text-xl font-black text-slate-900">Product Gallery</h3>
                         </div>
 
-                        <div className="space-y-4">
-                            <div className="relative aspect-square rounded-[2rem] bg-slate-50 border-2 border-dashed border-slate-200 overflow-hidden flex flex-col items-center justify-center group">
-                                {formData.image_url ? (
-                                    <img src={formData.image_url} alt="Preview" className="w-full h-full object-cover" />
-                                ) : (
-                                    <>
-                                        <ImageIcon className="w-8 h-8 text-slate-300 mb-2" />
-                                        <p className="text-xs font-bold text-slate-400 uppercase">Input URL Below</p>
-                                    </>
-                                )}
-                            </div>
+                        <div 
+                            onDragEnter={handleDrag}
+                            onDragLeave={handleDrag}
+                            onDragOver={handleDrag}
+                            onDrop={handleDrop}
+                            className={`relative min-h-[200px] rounded-[2rem] border-2 border-dashed transition-all flex flex-col items-center justify-center p-8 ${
+                                dragActive ? "border-primary bg-primary/5" : "border-slate-200 bg-slate-50"
+                            }`}
+                        >
                             <input
-                                type="text"
-                                value={formData.image_url}
-                                onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                                className="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-xs font-bold font-mono text-slate-900"
-                                placeholder="https://example.com/image.jpg"
+                                ref={fileInputRef}
+                                type="file"
+                                multiple
+                                accept="image/*"
+                                onChange={(e) => e.target.files && handleUpload(e.target.files)}
+                                className="hidden"
                             />
+                            
+                            {uploading ? (
+                                <div className="flex flex-col items-center gap-4">
+                                    <Loader2 className="w-10 h-10 animate-spin text-primary" />
+                                    <p className="font-bold text-slate-500 uppercase tracking-widest text-xs">Uploading images...</p>
+                                </div>
+                            ) : (
+                                <div className="text-center space-y-4">
+                                    <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mx-auto text-slate-400">
+                                        <Upload className="w-8 h-8" />
+                                    </div>
+                                    <div>
+                                        <p className="font-black text-slate-900">Drag & drop or paste images here</p>
+                                        <p className="text-sm font-bold text-slate-400">Support for multiple files and clipboard pasting</p>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => fileInputRef.current?.click()}
+                                        className="bg-white border border-slate-200 px-6 py-3 rounded-xl font-bold text-slate-700 hover:bg-slate-50 transition-all shadow-sm flex items-center gap-2 mx-auto"
+                                    >
+                                        <Plus className="w-4 h-4" /> Browse Files
+                                    </button>
+                                </div>
+                            )}
                         </div>
-                    </section>
 
+                        {formData.images && formData.images.length > 0 && (
+                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                {formData.images.map((url, idx) => (
+                                    <div key={idx} className="relative group aspect-square rounded-2xl overflow-hidden bg-slate-100 border border-slate-200">
+                                        <img src={url} alt={`Gallery ${idx}`} className="w-full h-full object-cover" />
+                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => setMainImage(url)}
+                                                className={`p-2 rounded-lg transition-all ${formData.image_url === url ? "bg-emerald-500 text-white" : "bg-white text-slate-900 hover:bg-emerald-50"}`}
+                                                title="Set as Main Image"
+                                            >
+                                                <ImageIcon className="w-4 h-4" />
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => removeImage(idx)}
+                                                className="p-2 rounded-lg bg-white text-red-500 hover:bg-red-50 transition-all"
+                                                title="Remove Image"
+                                            >
+                                                <Trash2 className="w-4 h-4" />
+                                            </button>
+                                        </div>
+                                        {formData.image_url === url && (
+                                            <div className="absolute top-2 left-2 bg-emerald-500 text-white text-[10px] font-black px-2 py-1 rounded-md uppercase tracking-tighter">
+                                                Main
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </section>
+                </div>
+
+                {/* Right Column: Meta */}
+                <div className="space-y-8">
                     <section className="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-sm space-y-8">
                         <div className="flex items-center gap-3 mb-2">
                             <div className="w-8 h-8 rounded-lg bg-purple-50 flex items-center justify-center text-purple-600">
@@ -217,7 +375,7 @@ export function ProductForm({ initialData }: ProductFormProps) {
 
                     <div className="flex flex-col gap-4">
                         <button
-                            disabled={loading}
+                            disabled={loading || uploading}
                             type="submit"
                             className="w-full bg-primary text-white py-5 rounded-[2rem] font-black text-lg shadow-xl shadow-primary/30 hover:scale-[1.02] transition-all active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50"
                         >
@@ -230,6 +388,15 @@ export function ProductForm({ initialData }: ProductFormProps) {
                         >
                             <X className="w-5 h-5" /> Cancel
                         </button>
+                    </div>
+
+                    <div className="p-6 rounded-[2rem] bg-indigo-50 border border-indigo-100">
+                        <p className="text-xs font-bold text-indigo-600 uppercase tracking-widest mb-2 flex items-center gap-2">
+                            <Info className="w-3 h-3" /> Pro Tip
+                        </p>
+                        <p className="text-sm font-medium text-indigo-900 leading-relaxed">
+                            You can paste images directly from your clipboard anywhere on this form!
+                        </p>
                     </div>
                 </div>
             </div>

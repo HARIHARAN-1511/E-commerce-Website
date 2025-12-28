@@ -8,6 +8,8 @@ import { Product } from "@/types"
 import { useCart } from "@/store/use-cart"
 import { useState } from "react"
 
+import Link from "next/link"
+
 interface ProductCardProps {
     product: Product
 }
@@ -33,36 +35,40 @@ export function ProductCard({ product }: ProductCardProps) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Category Badge */}
-            <span className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-slate-900/60 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest">
-                {product.category}
-            </span>
+            <Link href={`/shop/${product.id}`} className="block">
+                {/* Category Badge */}
+                <span className="absolute top-4 left-4 z-10 px-3 py-1 rounded-full bg-slate-900/60 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-widest">
+                    {product.category}
+                </span>
 
-            {/* Product Image */}
-            <div className="relative aspect-square overflow-hidden bg-slate-100">
-                <Image
-                    src={product.image_url || '/placeholder-product.jpg'}
-                    alt={product.name}
-                    fill
-                    className={`object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
-                />
+                {/* Product Image */}
+                <div className="relative aspect-square overflow-hidden bg-slate-100">
+                    <Image
+                        src={product.image_url || '/placeholder-product.jpg'}
+                        alt={product.name}
+                        fill
+                        className={`object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+                    />
 
-                {/* Quick Action Overlay */}
-                <div className={`absolute inset-0 bg-black/40 flex items-center justify-center gap-3 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
-                    <button className="w-10 h-10 rounded-full bg-white text-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-                        <Heart className="w-5 h-5" />
-                    </button>
-                    <button className="w-10 h-10 rounded-full bg-white text-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
-                        <Info className="w-5 h-5" />
-                    </button>
+                    {/* Quick Action Overlay */}
+                    <div className={`absolute inset-0 bg-black/40 flex items-center justify-center gap-3 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+                        <div className="w-10 h-10 rounded-full bg-white text-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+                            <Heart className="w-5 h-5" />
+                        </div>
+                        <div className="w-10 h-10 rounded-full bg-white text-slate-900 flex items-center justify-center hover:bg-primary hover:text-white transition-colors">
+                            <Info className="w-5 h-5" />
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </Link>
 
             {/* Product Info */}
             <div className="p-6">
-                <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-primary transition-colors">
-                    {product.name}
-                </h3>
+                <Link href={`/shop/${product.id}`}>
+                    <h3 className="text-lg font-bold text-slate-900 mb-1 group-hover:text-primary transition-colors">
+                        {product.name}
+                    </h3>
+                </Link>
                 <p className="text-sm text-slate-500 line-clamp-2 mb-4 leading-relaxed h-10">
                     {product.description}
                 </p>

@@ -5,6 +5,7 @@ export interface Product {
     price: number;
     category: 'computers' | 'printers' | 'scanners' | 'copiers' | 'surveillance' | 'spare-parts';
     image_url: string;
+    images?: string[];
     stock_quantity: number;
     specifications?: Record<string, string>;
     is_rental: boolean;
