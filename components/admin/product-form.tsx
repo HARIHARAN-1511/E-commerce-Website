@@ -69,15 +69,88 @@ export function ProductForm({ initialData }: ProductFormProps) {
 
                         <div className="space-y-6">
                             <div>
-                                <label className="block text-sm font-bold text-slate-400 uppercase tracking-widest mb-2">Product Name</label>
+                                <label className="block text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Product Name</label>
                                 <input
-                                    required
                                     type="text"
+                                    required
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                    className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-bold"
-                                    placeholder="e.g. HP LaserJet Pro M404dn"
+                                    className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-slate-900"
+                                    placeholder="High Performance Laptop"
                                 />
+                            </div>
+
+                            <div>
+                                <label className="block text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Description</label>
+                                <textarea
+                                    required
+                                    rows={4}
+                                    value={formData.description}
+                                    onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                                    className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-slate-900"
+                                    placeholder="Describe the product features..."
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <label className="block text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Purchase Price (₹)</label>
+                                    <input
+                                        type="number"
+                                        required
+                                        value={formData.price}
+                                        onChange={(e) => setFormData({ ...formData, price: Number(e.target.value) })}
+                                        className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-slate-900"
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Stock Quantity</label>
+                                    <input
+                                        type="number"
+                                        required
+                                        value={formData.stock_quantity}
+                                        onChange={(e) => setFormData({ ...formData, stock_quantity: Number(e.target.value) })}
+                                        className="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-slate-900"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="p-8 rounded-[2.5rem] bg-slate-50 space-y-8">
+                                <div className="flex items-center justify-between">
+                                    <div className="flex items-center gap-3">
+                                        <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600">
+                                            <ShieldCheck className="w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <p className="font-bold text-slate-900">Enable for Rental</p>
+                                            <p className="text-xs font-bold text-slate-500">Allow customers to rent this item.</p>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={() => setFormData({ ...formData, is_rental: !formData.is_rental })}
+                                        className={`w-14 h-8 rounded-full transition-all relative ${formData.is_rental ? "bg-emerald-500" : "bg-slate-200"}`}
+                                    >
+                                        <div className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-sm transition-all ${formData.is_rental ? "left-7" : "left-1"}`} />
+                                    </button>
+                                </div>
+
+                                {formData.is_rental && (
+                                    <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: 'auto' }}
+                                        className="pt-4 border-t border-slate-200"
+                                    >
+                                        <label className="block text-sm font-bold text-slate-500 uppercase tracking-widest mb-2">Monthly Rental Price (₹)</label>
+                                        <input
+                                            type="number"
+                                            required={formData.is_rental}
+                                            value={formData.rental_price || ''}
+                                            onChange={(e) => setFormData({ ...formData, rental_price: Number(e.target.value) })}
+                                            className="w-full bg-white border-none rounded-2xl px-6 py-4 focus:ring-2 focus:ring-primary/20 transition-all font-medium text-slate-900"
+                                        />
+                                    </motion.div>
+                                )}
                             </div>
 
                             <div>

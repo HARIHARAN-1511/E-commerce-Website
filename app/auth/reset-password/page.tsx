@@ -52,15 +52,15 @@ export default function ResetPasswordPage() {
                     className="max-w-md w-full bg-white p-8 rounded-[2rem] border border-slate-200 shadow-xl text-center"
                 >
                     <div className="w-20 h-20 bg-green-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                        <CheckCircle2 className="w-10 h-10 text-green-600" />
+                        <CheckCircle2 className="w-10 h-10 text-green-500" />
                     </div>
-                    <h1 className="text-3xl font-black mb-4 text-slate-900">Password Reset!</h1>
-                    <p className="text-slate-600 font-medium mb-8">
+                    <h1 className="text-3xl font-black mb-4">Password Reset!</h1>
+                    <p className="text-slate-500 font-medium mb-8">
                         Your password has been successfully updated. Redirecting you to login...
                     </p>
                     <button
                         onClick={() => router.push('/auth')}
-                        className="w-full bg-primary text-white py-4 rounded-2xl font-black hover:bg-primary/90 transition-all shadow-xl shadow-primary/20"
+                        className="w-full bg-primary text-white py-4 rounded-2xl font-bold hover:bg-primary/90 transition-all"
                     >
                         Go to Login Now
                     </button>
@@ -77,8 +77,8 @@ export default function ResetPasswordPage() {
                 className="max-w-md w-full"
             >
                 <div className="text-center mb-10">
-                    <h1 className="text-4xl font-black tracking-tight mb-2 text-slate-900">Set New Password</h1>
-                    <p className="text-slate-600 font-medium">
+                    <h1 className="text-4xl font-black tracking-tight mb-2">Set New Password</h1>
+                    <p className="text-slate-500 font-medium">
                         Secure your account with a new strong password.
                     </p>
                 </div>
@@ -86,21 +86,21 @@ export default function ResetPasswordPage() {
                 <div className="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-xl">
                     <form onSubmit={handleReset} className="space-y-6">
                         <div>
-                            <label className="block text-sm font-black mb-2 uppercase tracking-wide text-slate-500">New Password</label>
+                            <label className="block text-sm font-bold mb-2 uppercase tracking-wide text-slate-400">New Password</label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     required
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full bg-slate-50 border border-slate-200 text-slate-900 pl-12 pr-12 py-4 rounded-2xl focus:border-primary focus:bg-white transition-all outline-none font-bold text-sm"
+                                    className="w-full bg-slate-50 pl-12 pr-12 py-4 rounded-2xl border border-transparent focus:border-primary focus:bg-white transition-all outline-none font-medium text-sm"
                                     placeholder="••••••••"
                                 />
                                 <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 focus:outline-none"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
                                 >
                                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                                 </button>
@@ -108,29 +108,29 @@ export default function ResetPasswordPage() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-black mb-2 uppercase tracking-wide text-slate-500">Confirm Password</label>
+                            <label className="block text-sm font-bold mb-2 uppercase tracking-wide text-slate-400">Confirm Password</label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
                                 <input
                                     type={showPassword ? "text" : "password"}
                                     required
                                     value={confirmPassword}
                                     onChange={(e) => setConfirmPassword(e.target.value)}
-                                    className="w-full bg-slate-50 border border-slate-200 text-slate-900 pl-12 pr-12 py-4 rounded-2xl focus:border-primary focus:bg-white transition-all outline-none font-bold text-sm"
+                                    className="w-full bg-slate-50 pl-12 pr-12 py-4 rounded-2xl border border-transparent focus:border-primary focus:bg-white transition-all outline-none font-medium text-sm"
                                     placeholder="••••••••"
                                 />
                             </div>
                         </div>
 
                         {error && (
-                            <div className="p-4 rounded-xl bg-red-50 text-red-600 text-sm font-bold border border-red-100">
+                            <div className="p-4 rounded-xl bg-red-50 text-red-500 text-sm font-bold">
                                 {error}
                             </div>
                         )}
 
                         <button
                             disabled={loading}
-                            className="w-full bg-primary text-white py-4 rounded-2xl font-black flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 active:scale-[0.98] disabled:opacity-50"
+                            className="w-full bg-primary text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 hover:bg-primary/90 transition-all shadow-xl shadow-primary/20 active:scale-[0.98] disabled:opacity-50"
                         >
                             {loading ? (
                                 <Loader2 className="w-5 h-5 animate-spin" />

@@ -126,44 +126,44 @@ export default function AdminProductsPage() {
                                                         {product.image_url ? (
                                                             <Image src={product.image_url} alt={product.name} fill className="object-cover" />
                                                         ) : (
-                                                            <Package className="w-6 h-6 text-slate-400 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                                                            <Package className="w-6 h-6 text-slate-300 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                                                         )}
                                                     </div>
                                                     <div>
                                                         <p className="font-bold text-slate-900 group-hover:text-primary transition-colors">{product.name}</p>
-                                                        <p className="text-xs font-black text-slate-500 flex items-center gap-1">
+                                                        <p className="text-xs font-bold text-slate-400 flex items-center gap-1">
                                                             {product.is_rental ? (
-                                                                <span className="text-emerald-600 bg-emerald-50 px-2 rounded-md border border-emerald-100">Rental Available</span>
+                                                                <span className="text-emerald-500 bg-emerald-50 px-2 rounded-md">Rental Available</span>
                                                             ) : (
-                                                                <span className="text-blue-600 bg-blue-50 px-2 rounded-md border border-blue-100">Purchase Only</span>
+                                                                <span className="text-blue-500 bg-blue-50 px-2 rounded-md">Purchase Only</span>
                                                             )}
                                                         </p>
                                                     </div>
                                                 </div>
                                             </td>
                                             <td className="px-8 py-6">
-                                                <span className="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider border border-slate-200">
+                                                <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider">
                                                     {product.category}
                                                 </span>
                                             </td>
                                             <td className="px-8 py-6 font-black text-slate-900">
                                                 ₹{product.price.toLocaleString()}
                                             </td>
-                                            <td className="px-8 py-6 font-black text-slate-600">
+                                            <td className="px-8 py-6 font-bold text-slate-500">
                                                 {product.stock_quantity} units
                                             </td>
                                             <td className="px-8 py-6 text-right">
                                                 <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-all">
                                                     <Link
                                                         href={`/admin/products/edit/${product.id}`}
-                                                        className="p-2 bg-white text-slate-600 hover:text-primary rounded-lg transition-all shadow-sm border border-slate-200 font-bold"
+                                                        className="p-2 hover:bg-white hover:text-primary rounded-lg transition-all shadow-sm border border-transparent hover:border-slate-200"
                                                     >
                                                         <Edit2 className="w-4 h-4" />
                                                     </Link>
                                                     <button
                                                         onClick={() => handleDelete(product.id)}
                                                         disabled={isDeleting === product.id}
-                                                        className="p-2 bg-white text-slate-600 hover:text-red-500 rounded-lg transition-all shadow-sm border border-slate-200 font-bold"
+                                                        className="p-2 hover:bg-red-50 hover:text-red-500 rounded-lg transition-all shadow-sm border border-transparent hover:border-red-100 disabled:opacity-50"
                                                     >
                                                         {isDeleting === product.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                                                     </button>
