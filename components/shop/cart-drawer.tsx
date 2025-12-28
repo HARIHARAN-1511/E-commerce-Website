@@ -66,7 +66,7 @@ export function CartDrawer({ isOpen, onCloseAction }: CartDrawerProps) {
                                         <div className="flex-grow">
                                             <div className="flex justify-between mb-1">
                                                 <h3 className="font-bold text-slate-900 line-clamp-1">{item.name}</h3>
-                                                <span className="font-black text-slate-900">${(item.price * item.quantity).toFixed(2)}</span>
+                                                <span className="font-black text-slate-900">₹{(item.price * item.quantity).toFixed(2)}</span>
                                             </div>
                                             <p className="text-xs text-slate-500 mb-3 uppercase font-bold">{item.category}</p>
 
@@ -113,7 +113,7 @@ export function CartDrawer({ isOpen, onCloseAction }: CartDrawerProps) {
                                 <div className="space-y-2 mb-6">
                                     <div className="flex justify-between text-slate-500 font-medium">
                                         <span>Subtotal</span>
-                                        <span>${totalPrice().toFixed(2)}</span>
+                                        <span>₹{totalPrice().toFixed(2)}</span>
                                     </div>
                                     <div className="flex justify-between text-slate-500 font-medium">
                                         <span>Shipping</span>
@@ -121,7 +121,7 @@ export function CartDrawer({ isOpen, onCloseAction }: CartDrawerProps) {
                                     </div>
                                     <div className="flex justify-between text-xl font-black pt-2 text-slate-900 border-t border-slate-100">
                                         <span>Total</span>
-                                        <span>${totalPrice().toFixed(2)}</span>
+                                        <span>₹{totalPrice().toFixed(2)}</span>
                                     </div>
                                 </div>
                                 <Link

@@ -43,12 +43,12 @@ export function ProductCard({ product }: ProductCardProps) {
 
                 {/* Product Image */}
                 <div className="relative aspect-square overflow-hidden bg-slate-100">
-                    <Image
-                        src={product.image_url || '/placeholder-product.jpg'}
-                        alt={product.name}
-                        fill
-                        className={`object-cover transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
-                    />
+                        <Image
+                            src={product.image_url || '/placeholder-product.jpg'}
+                            alt={product.name}
+                            fill
+                            className={`object-contain p-4 transition-transform duration-700 ${isHovered ? 'scale-110' : 'scale-100'}`}
+                        />
 
                     {/* Quick Action Overlay */}
                     <div className={`absolute inset-0 bg-black/40 flex items-center justify-center gap-3 transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
@@ -76,11 +76,11 @@ export function ProductCard({ product }: ProductCardProps) {
                 <div className="flex items-center justify-between mt-auto">
                     <div>
                         <span className="text-2xl font-black text-slate-900">
-                            ${product.price}
+                            ₹{product.price}
                         </span>
                         {product.is_rental && (
                             <span className="block text-[10px] text-primary font-bold uppercase">
-                                Rental: ${product.rental_price_monthly}/mo
+                                Rental: ₹{product.rental_price_monthly}/mo
                             </span>
                         )}
                     </div>

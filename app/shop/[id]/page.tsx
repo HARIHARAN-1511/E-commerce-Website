@@ -96,7 +96,7 @@ export default function ProductDetailPage() {
                                             src={activeImage || '/placeholder-product.jpg'}
                                             alt={product.name}
                                             fill
-                                            className="object-contain p-8"
+                                            className="object-contain p-2"
                                             priority
                                         />
                                     </motion.div>
