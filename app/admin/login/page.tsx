@@ -8,7 +8,7 @@ import { Mail, Lock, Loader2, ArrowRight, ShieldAlert, Eye, EyeOff } from "lucid
 import { ADMIN_CONFIG } from "@/lib/config"
 
 export default function AdminLoginPage() {
-    const [email, setEmail] = React.useState("")
+    const [email, setEmail] = React.useState("admin@psvitsolution.in")
     const [password, setPassword] = React.useState("")
     const [showPassword, setShowPassword] = React.useState(false)
     const [isResetting, setIsResetting] = React.useState(false)
@@ -121,8 +121,9 @@ export default function AdminLoginPage() {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full bg-slate-50 border border-transparent text-slate-900 pl-12 pr-6 py-4 rounded-2xl focus:border-primary focus:bg-white transition-all outline-none font-medium text-sm"
+                                        className="w-full bg-slate-50 border border-transparent text-slate-900 pl-12 pr-6 py-4 rounded-2xl focus:border-primary focus:bg-white transition-all outline-none font-medium text-sm cursor-not-allowed opacity-80"
                                         placeholder="admin@psvitsolution.in"
+                                        readOnly
                                     />
                                 </div>
                             </div>
