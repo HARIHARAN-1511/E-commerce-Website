@@ -36,7 +36,7 @@ export function ProductForm({ initialData }: ProductFormProps) {
     const handleUpload = async (files: FileList | File[]) => {
         setUploading(true)
         const newImages: string[] = [...(formData.images || [])]
-        
+
         for (const file of Array.from(files)) {
             if (!file.type.startsWith('image/')) continue
 
@@ -56,7 +56,7 @@ export function ProductForm({ initialData }: ProductFormProps) {
                     .getPublicUrl(filePath)
 
                 newImages.push(publicUrl)
-                
+
                 // Set first image as main image if none exists
                 if (!formData.image_url) {
                     setFormData(prev => ({ ...prev, image_url: publicUrl }))
@@ -107,12 +107,12 @@ export function ProductForm({ initialData }: ProductFormProps) {
     const removeImage = (index: number) => {
         const newImages = [...(formData.images || [])]
         const removed = newImages.splice(index, 1)[0]
-        
+
         const update: Partial<Product> = { images: newImages }
         if (formData.image_url === removed) {
             update.image_url = newImages[0] || ""
         }
-        
+
         setFormData(prev => ({ ...prev, ...update }))
     }
 
@@ -134,13 +134,13 @@ export function ProductForm({ initialData }: ProductFormProps) {
             if (initialData?.id) {
                 const { error } = await supabase
                     .from('products')
-                    .update(submitData)
+                    .update(submitData as any)
                     .eq('id', initialData.id)
                 if (error) throw error
             } else {
                 const { error } = await supabase
                     .from('products')
-                    .insert([submitData])
+                    .insert([submitData] as any)
                 if (error) throw error
             }
             router.push('/admin/products')
@@ -153,8 +153,8 @@ export function ProductForm({ initialData }: ProductFormProps) {
     }
 
     return (
-        <form 
-            onSubmit={handleSubmit} 
+        <form
+            onSubmit={handleSubmit}
             onPaste={handlePaste}
             className="space-y-12 max-w-5xl"
         >
@@ -249,7 +249,7 @@ export function ProductForm({ initialData }: ProductFormProps) {
                                             <input
                                                 type="number"
                                                 required={formData.is_rental}
-                                                value={formData.rental_price_monthly}
+                                                value={formData.rental_price_monthly ?? 0}
                                                 onChange={(e) => setFormData({ ...formData, rental_price_monthly: Number(e.target.value) })}
                                                 className="w-full bg-white border-2 border-emerald-100 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-emerald-500/20 transition-all font-black text-slate-900"
                                             />
@@ -268,14 +268,13 @@ export function ProductForm({ initialData }: ProductFormProps) {
                             <h3 className="text-xl font-black text-slate-900">Product Gallery</h3>
                         </div>
 
-                        <div 
+                        <div
                             onDragEnter={handleDrag}
                             onDragLeave={handleDrag}
                             onDragOver={handleDrag}
                             onDrop={handleDrop}
-                            className={`relative min-h-[200px] rounded-[2rem] border-2 border-dashed transition-all flex flex-col items-center justify-center p-8 ${
-                                dragActive ? "border-primary bg-primary/5" : "border-slate-200 bg-slate-50"
-                            }`}
+                            className={`relative min-h-[200px] rounded-[2rem] border-2 border-dashed transition-all flex flex-col items-center justify-center p-8 ${dragActive ? "border-primary bg-primary/5" : "border-slate-200 bg-slate-50"
+                                }`}
                         >
                             <input
                                 ref={fileInputRef}
@@ -285,7 +284,7 @@ export function ProductForm({ initialData }: ProductFormProps) {
                                 onChange={(e) => e.target.files && handleUpload(e.target.files)}
                                 className="hidden"
                             />
-                            
+
                             {uploading ? (
                                 <div className="flex flex-col items-center gap-4">
                                     <Loader2 className="w-10 h-10 animate-spin text-primary" />

@@ -135,16 +135,18 @@ export function ContactPageClient() {
                                 </div>
                             </div>
 
-                            <div className="bg-primary rounded-[3rem] p-10 text-white shadow-xl shadow-primary/20">
-                                <h3 className="text-xl font-black mb-4">Need Help Fast?</h3>
-                                <p className="text-white/80 text-sm font-medium leading-relaxed mb-8">
+                            <div className="bg-slate-900 rounded-[3rem] p-10 text-white shadow-2xl relative overflow-hidden">
+                                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 rounded-full blur-3xl -mr-16 -mt-16" />
+
+                                <h3 className="text-xl font-black mb-4 relative z-10">Need Help <span className="text-primary italic">Fast?</span></h3>
+                                <p className="text-slate-400 text-sm font-medium leading-relaxed mb-8 relative z-10">
                                     Equipment breakdown? Call our emergency support hotline for immediate assistance.
                                 </p>
-                                <div className="space-y-4">
-                                    <a href="tel:+919159145644" className="block w-full bg-white text-primary py-4 rounded-2xl font-black text-center hover:bg-slate-50 transition-colors shadow-lg shadow-black/10">
+                                <div className="space-y-4 relative z-10">
+                                    <a href="tel:+919159145644" className="block w-full bg-white text-[#4f46e5] py-4 rounded-2xl font-black text-center hover:bg-slate-50 transition-colors shadow-lg shadow-black/20">
                                         Call Emergency
                                     </a>
-                                    <a href="https://wa.me/919385417594" className="block w-full bg-emerald-500 text-white py-4 rounded-2xl font-black text-center hover:bg-emerald-600 transition-colors shadow-lg shadow-black/10 flex items-center justify-center gap-2">
+                                    <a href="https://wa.me/919385417594" className="block w-full bg-emerald-500 text-white py-4 rounded-2xl font-black text-center hover:bg-emerald-600 transition-colors shadow-lg shadow-black/20 flex items-center justify-center gap-2">
                                         <MessageSquare className="w-5 h-5 fill-current" />
                                         WhatsApp Chat
                                     </a>

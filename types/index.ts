@@ -5,11 +5,11 @@ export interface Product {
     price: number;
     category: 'computers' | 'printers' | 'scanners' | 'copiers' | 'surveillance' | 'spare-parts';
     image_url: string;
-    images?: string[];
+    images?: string[] | null;
     stock_quantity: number;
-    specifications?: Record<string, string>;
+    specifications?: any;
     is_rental: boolean;
-    rental_price_monthly?: number;
+    rental_price_monthly?: number | null;
     created_at: string;
 }
 
